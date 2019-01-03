@@ -1,10 +1,13 @@
-﻿// UnmanagedDll.cpp : DLL アプリケーション用にエクスポートされる関数を定義します。
-//
-
 #include "stdafx.h"
-#include "UnmanagedDll.h"
+#include "UnmanagedDLL.h"
 
-DLL int add(int a, int b)
-{
+char str[256] = "Hello ";
+
+DLL int add(int a, int b) {
 	return a + b;
+}
+
+DLL char *concat(char *c) {
+	strcat_s(str, 256, c);
+	return str;
 }

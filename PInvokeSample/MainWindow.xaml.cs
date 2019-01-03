@@ -25,6 +25,9 @@ namespace PInvokeSample
         [DllImport("UnmanagedDll.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern int add(int a, int b);
 
+        [DllImport("UnmanagedDll.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private static extern IntPtr concat([MarshalAs(UnmanagedType.LPStr)]string c);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,6 +38,9 @@ namespace PInvokeSample
             setDllDirectry();
             var sum = add(1, 2);
             Console.WriteLine("1 + 2 = {0}", sum);
+
+            var str = Marshal.PtrToStringAnsi(concat("world!"));
+            Console.WriteLine(str);
         }
 
 
@@ -51,7 +57,7 @@ namespace PInvokeSample
             }
             else
             {
-                assemblyLocation += @"\x86";
+                assemblyLocation += @"\Win32";
             }
 
             //Specify DLL path
